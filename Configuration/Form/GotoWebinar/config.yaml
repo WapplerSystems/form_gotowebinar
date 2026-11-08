@@ -1,5 +1,0 @@
-name: wapplersystems/goto-webinar
-priority: 543
-
-imports:
-  - { resource: 'EXT:goto_webinar/Configuration/Yaml/FormSetup.yaml' }

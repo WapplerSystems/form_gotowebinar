@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\GoTo;
+namespace WapplerSystems\FormGotowebinar\GoTo;
 
 use TYPO3\CMS\Core\Registry;
 
@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Registry;
  */
 class TokenStore
 {
-    private const NAMESPACE = 'tx_gotowebinar';
+    private const NAMESPACE = 'tx_formgotowebinar';
 
     public function __construct(private readonly Registry $registry) {}
 

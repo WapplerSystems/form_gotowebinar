@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Tests\Unit\Finishers;
+namespace WapplerSystems\FormGotowebinar\Tests\Unit\Finishers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use WapplerSystems\GotoWebinar\Finishers\WebinarRegisterFinisher;
-use WapplerSystems\GotoWebinar\GoTo\ApiException;
+use WapplerSystems\FormGotowebinar\Finishers\WebinarRegisterFinisher;
+use WapplerSystems\FormGotowebinar\GoTo\ApiException;
 
 final class WebinarRegisterFinisherTest extends TestCase
 {

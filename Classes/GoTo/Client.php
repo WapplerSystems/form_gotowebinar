@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\GoTo;
+namespace WapplerSystems\FormGotowebinar\GoTo;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
@@ -238,7 +238,7 @@ class Client
      */
     private function refreshAccessToken(): string
     {
-        $lock = $this->lockFactory->createLocker('gotowebinar_token', LockingStrategyInterface::LOCK_CAPABILITY_EXCLUSIVE);
+        $lock = $this->lockFactory->createLocker('formgotowebinar_token', LockingStrategyInterface::LOCK_CAPABILITY_EXCLUSIVE);
         $lock->acquire();
         try {
             // Another process may have refreshed while we waited for the lock.
@@ -361,7 +361,7 @@ class Client
     private function setting(string $name): mixed
     {
         try {
-            return $this->extensionConfiguration->get('goto_webinar', $name);
+            return $this->extensionConfiguration->get('form_gotowebinar', $name);
         } catch (\Throwable) {
             return null;
         }

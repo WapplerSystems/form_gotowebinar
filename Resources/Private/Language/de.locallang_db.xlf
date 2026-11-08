@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:goto_webinar/Resources/Private/Language/locallang_db.xlf" date="2026-11-08T12:00:00Z" product-name="goto_webinar">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:form_gotowebinar/Resources/Private/Language/locallang_db.xlf" date="2026-11-08T12:00:00Z" product-name="form_gotowebinar">
 		<header/>
 		<body>
-			<trans-unit id="tx_gotowebinar_webinar"><source>GoTo webinar</source><target>GoTo-Webinar</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.tab.host"><source>Host</source><target>Host</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.webinar_key"><source>Webinar in GoTo</source><target>Webinar in GoTo</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.webinar_key.description"><source>Date and registration come from this GoTo webinar. Only upcoming webinars are listed.</source><target>Termin und Anmeldung kommen aus diesem GoTo-Webinar. Angezeigt werden nur kommende Webinare.</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.label"><source>Label above the title</source><target>Zeile über dem Titel</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.label.description"><source>e.g. WEBINAR 01 / 13</source><target>z. B. WEBINAR 01 / 13</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.title"><source>Title</source><target>Titel</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.title.description"><source>Leave empty to use the title from GoTo.</source><target>Leer lassen, um den Titel aus GoTo zu übernehmen.</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.description"><source>Text</source><target>Text</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.image"><source>Graphic</source><target>Grafik</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.host_name"><source>Host name</source><target>Name des Hosts</target></trans-unit>
-			<trans-unit id="tx_gotowebinar_webinar.host_image"><source>Host photo</source><target>Foto des Hosts</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar"><source>GoTo webinar</source><target>GoTo-Webinar</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.tab.host"><source>Host</source><target>Host</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.webinar_key"><source>Webinar in GoTo</source><target>Webinar in GoTo</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.webinar_key.description"><source>Date and registration come from this GoTo webinar. Only upcoming webinars are listed.</source><target>Termin und Anmeldung kommen aus diesem GoTo-Webinar. Angezeigt werden nur kommende Webinare.</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.label"><source>Label above the title</source><target>Zeile über dem Titel</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.label.description"><source>e.g. WEBINAR 01 / 13</source><target>z. B. WEBINAR 01 / 13</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.title"><source>Title</source><target>Titel</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.title.description"><source>Leave empty to use the title from GoTo.</source><target>Leer lassen, um den Titel aus GoTo zu übernehmen.</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.description"><source>Text</source><target>Text</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.image"><source>Graphic</source><target>Grafik</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.host_name"><source>Host name</source><target>Name des Hosts</target></trans-unit>
+			<trans-unit id="tx_formgotowebinar_webinar.host_image"><source>Host photo</source><target>Foto des Hosts</target></trans-unit>
 		</body>
 	</file>
 </xliff>

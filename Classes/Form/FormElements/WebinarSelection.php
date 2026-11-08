@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Form\FormElements;
+namespace WapplerSystems\FormGotowebinar\Form\FormElements;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Cache\CacheDataCollector;
 use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Form\Domain\Model\FormElements\GenericOptionableFormElement;
-use WapplerSystems\GotoWebinar\Service\WebinarProvider;
+use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
 
 /**
  * Multi checkbox whose options are the upcoming GoTo webinars.
@@ -62,7 +62,7 @@ class WebinarSelection extends GenericOptionableFormElement
             $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
             $collector = $request instanceof ServerRequestInterface ? $request->getAttribute('frontend.cache.collector') : null;
             if ($collector instanceof CacheDataCollector) {
-                $collector->addCacheTags(new CacheTag('tx_gotowebinar', $provider->cacheLifetime()));
+                $collector->addCacheTags(new CacheTag('tx_formgotowebinar', $provider->cacheLifetime()));
             }
         }
         return $this->tiles;

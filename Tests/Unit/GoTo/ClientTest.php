@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Tests\Unit\GoTo;
+namespace WapplerSystems\FormGotowebinar\Tests\Unit\GoTo;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use WapplerSystems\GotoWebinar\Command\ConnectCommand;
-use WapplerSystems\GotoWebinar\GoTo\ApiException;
-use WapplerSystems\GotoWebinar\GoTo\Client;
+use WapplerSystems\FormGotowebinar\Command\ConnectCommand;
+use WapplerSystems\FormGotowebinar\GoTo\ApiException;
+use WapplerSystems\FormGotowebinar\GoTo\Client;
 
 final class ClientTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Command;
+namespace WapplerSystems\FormGotowebinar\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -10,10 +10,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use WapplerSystems\GotoWebinar\GoTo\ApiException;
-use WapplerSystems\GotoWebinar\GoTo\Client;
-use WapplerSystems\GotoWebinar\GoTo\TokenStore;
-use WapplerSystems\GotoWebinar\Service\WebinarProvider;
+use WapplerSystems\FormGotowebinar\GoTo\ApiException;
+use WapplerSystems\FormGotowebinar\GoTo\Client;
+use WapplerSystems\FormGotowebinar\GoTo\TokenStore;
+use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
 
 /**
  * One-time OAuth grant: an organizer of the GoTo account opens the printed
@@ -49,7 +49,7 @@ class ConnectCommand extends Command
             return Command::SUCCESS;
         }
         if (!$this->client->hasCredentials()) {
-            $io->error('Set clientId and clientSecret in the extension configuration of goto_webinar (or GOTO_CLIENT_ID / GOTO_CLIENT_SECRET) first.');
+            $io->error('Set clientId and clientSecret in the extension configuration of form_gotowebinar (or GOTO_CLIENT_ID / GOTO_CLIENT_SECRET) first.');
             return Command::FAILURE;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-$lll = 'LLL:EXT:goto_webinar/Resources/Private/Language/locallang_db.xlf:tx_gotowebinar_webinar';
+$lll = 'LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang_db.xlf:tx_formgotowebinar_webinar';
 
 return [
     'ctrl' => [
@@ -19,7 +19,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:goto_webinar/Resources/Public/Icons/Extension.svg',
+        'iconfile' => 'EXT:form_gotowebinar/Resources/Public/Icons/Extension.svg',
         'searchFields' => 'title,label,host_name',
     ],
     'types' => [
@@ -47,7 +47,7 @@ return [
                 'items' => [
                     ['label' => '', 'value' => ''],
                 ],
-                'itemsProcFunc' => \WapplerSystems\GotoWebinar\Tca\WebinarItems::class . '->addItems',
+                'itemsProcFunc' => \WapplerSystems\FormGotowebinar\Tca\WebinarItems::class . '->addItems',
                 'required' => true,
             ],
         ],

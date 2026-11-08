@@ -4,25 +4,25 @@ services:
     autoconfigure: true
     public: false
 
-  WapplerSystems\GotoWebinar\:
+  WapplerSystems\FormGotowebinar\:
     resource: '../Classes/*'
 
-  cache.gotowebinar:
+  cache.formgotowebinar:
     class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
     factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
-    arguments: ['gotowebinar']
+    arguments: ['formgotowebinar']
 
-  WapplerSystems\GotoWebinar\Service\WebinarProvider:
+  WapplerSystems\FormGotowebinar\Service\WebinarProvider:
     public: true
     arguments:
-      $cache: '@cache.gotowebinar'
+      $cache: '@cache.formgotowebinar'
 
-  WapplerSystems\GotoWebinar\Finishers\WebinarRegisterFinisher:
+  WapplerSystems\FormGotowebinar\Finishers\WebinarRegisterFinisher:
     public: true
     shared: false
 
-  WapplerSystems\GotoWebinar\GoTo\Client:
+  WapplerSystems\FormGotowebinar\GoTo\Client:
     public: true
 
-  WapplerSystems\GotoWebinar\Tca\WebinarItems:
+  WapplerSystems\FormGotowebinar\Tca\WebinarItems:
     public: true

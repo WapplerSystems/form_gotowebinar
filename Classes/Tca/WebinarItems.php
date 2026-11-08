@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Tca;
+namespace WapplerSystems\FormGotowebinar\Tca;
 
-use WapplerSystems\GotoWebinar\Service\WebinarProvider;
+use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
 
 /**
- * Select items for tx_gotowebinar_webinar.webinar_key: the upcoming
+ * Select items for tx_formgotowebinar_webinar.webinar_key: the upcoming
  * webinars of the connected GoTo account. A stored key that is no longer
  * upcoming stays selectable, so opening an old record does not show an
  * invalid value.

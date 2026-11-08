@@ -5,12 +5,12 @@ TYPO3:
         standard:
           formEditor:
             translationFiles:
-              2370: 'EXT:goto_webinar/Resources/Private/Language/locallang.xlf'
+              2370: 'EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf'
           formElementsDefinition:
             Form:
               renderingOptions:
                 partialRootPaths:
-                  2370: 'EXT:goto_webinar/Resources/Private/Frontend/Partials/'
+                  2370: 'EXT:form_gotowebinar/Resources/Private/Frontend/Partials/'
               formEditor:
                 editors:
                   900:
@@ -47,7 +47,7 @@ TYPO3:
                           identifier: removeButton
                           templateName: Inspector-RemoveElementEditor
             GoToWebinarSelection:
-              implementationClassName: WapplerSystems\GotoWebinar\Form\FormElements\WebinarSelection
+              implementationClassName: WapplerSystems\FormGotowebinar\Form\FormElements\WebinarSelection
               renderingOptions:
                 templateName: GoToWebinarSelection
               properties:
@@ -103,7 +103,7 @@ TYPO3:
                     subjectFilter: ''
           finishersDefinition:
             GoToWebinarRegister:
-              implementationClassName: WapplerSystems\GotoWebinar\Finishers\WebinarRegisterFinisher
+              implementationClassName: WapplerSystems\FormGotowebinar\Finishers\WebinarRegisterFinisher
               formEditor:
                 iconIdentifier: form-finisher
                 label: 'GoTo Webinar - Register'

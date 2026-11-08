@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Tests\Unit\Service;
+namespace WapplerSystems\FormGotowebinar\Tests\Unit\Service;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use WapplerSystems\GotoWebinar\Service\WebinarProvider;
+use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
 
 final class WebinarProviderTest extends TestCase
 {

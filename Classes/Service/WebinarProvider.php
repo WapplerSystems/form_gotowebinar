@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Service;
+namespace WapplerSystems\FormGotowebinar\Service;
 
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
@@ -15,9 +15,9 @@ use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use WapplerSystems\GotoWebinar\GoTo\ApiException;
-use WapplerSystems\GotoWebinar\GoTo\Client;
-use WapplerSystems\GotoWebinar\GoTo\TokenStore;
+use WapplerSystems\FormGotowebinar\GoTo\ApiException;
+use WapplerSystems\FormGotowebinar\GoTo\Client;
+use WapplerSystems\FormGotowebinar\GoTo\TokenStore;
 
 /**
  * Joins the upcoming webinars from GoTo with the webinar records editors
@@ -29,7 +29,7 @@ use WapplerSystems\GotoWebinar\GoTo\TokenStore;
  */
 class WebinarProvider
 {
-    public const TABLE = 'tx_gotowebinar_webinar';
+    public const TABLE = 'tx_formgotowebinar_webinar';
     private const CACHE_KEY = 'upcoming';
 
     public function __construct(
@@ -59,7 +59,7 @@ class WebinarProvider
                 $this->tokenStore->storeLastWebinars($webinars);
                 $this->cache->set(self::CACHE_KEY, $webinars, [], $this->cacheLifetime());
             } catch (ApiException $e) {
-                $this->logger->error('goto_webinar: webinar list not fetched, using the last known list', [
+                $this->logger->error('form_gotowebinar: webinar list not fetched, using the last known list', [
                     'status' => $e->status,
                     'error' => $e->errorMessage() ?: $e->getMessage(),
                 ]);
@@ -210,7 +210,7 @@ class WebinarProvider
     public function cacheLifetime(): int
     {
         try {
-            $lifetime = (int)$this->extensionConfiguration->get('goto_webinar', 'cacheLifetime');
+            $lifetime = (int)$this->extensionConfiguration->get('form_gotowebinar', 'cacheLifetime');
         } catch (\Throwable) {
             $lifetime = 0;
         }

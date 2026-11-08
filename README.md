@@ -6,7 +6,7 @@ GoTo then lists the person as a normal registrant with a personal join link.
 
 - **Form element `GoToWebinarSelection`**: options come live from GoTo. Ended,
   cancelled and full webinars disappear on their own.
-- **Records `tx_gotowebinar_webinar`** (list module, in a folder): graphic,
+- **Records `tx_formgotowebinar_webinar`** (list module, in a folder): graphic,
   label ("WEBINAR 01 / 13"), title, text and host for one GoTo webinar. A GoTo
   webinar without record still shows with title and description from GoTo
   (`includeUnmanaged`, narrowed by `subjectFilter`).
@@ -19,7 +19,7 @@ GoTo then lists the person as a normal registrant with a personal join link.
 1. Create an OAuth client in the GoTo developer center
    (<https://developer.goto.com/>), scope for GoTo Webinar, with a redirect URI
    on the site (any page works, only the `code` parameter is read).
-2. Extension configuration `goto_webinar`: `clientId`, `clientSecret`,
+2. Extension configuration `form_gotowebinar`: `clientId`, `clientSecret`,
    `redirectUri` (or env `GOTO_CLIENT_ID` / `GOTO_CLIENT_SECRET`).
 3. `vendor/bin/typo3 gotowebinar:connect`: open the printed URL, log in as an
    organizer, paste the URL GoTo redirects to. Tokens go to sys_registry.
@@ -61,4 +61,4 @@ closed is hidden for a day.
 
 ## Tests
 
-`vendor/bin/phpunit -c packages/goto_webinar/phpunit.xml.dist`
+`vendor/bin/phpunit -c packages/form_gotowebinar/phpunit.xml.dist`

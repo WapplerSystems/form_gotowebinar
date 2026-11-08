@@ -4,7 +4,7 @@
     the hand-built LINEAR@WORK page: date, host | number, title, text | graphic.
 </f:comment>
 <formvh:renderRenderable renderable="{element}">
-    <f:asset.css identifier="gotowebinar-selection" href="EXT:goto_webinar/Resources/Public/Css/selection.css" />
+    <f:asset.css identifier="gotowebinar-selection" href="EXT:form_gotowebinar/Resources/Public/Css/selection.css" />
     <f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
         <f:variable name="errorClass">{f:if(condition: '{validationResults.errors}', then: '{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}')}</f:variable>
         <fieldset id="{element.uniqueIdentifier}" class="{element.properties.containerClassAttribute} {errorClass}">
@@ -19,13 +19,13 @@
                                 <div class="col-12 col-md-3 gotowebinar-tile__meta">
                                     <f:if condition="{tile.start}">
                                         <p class="mb-0"><strong><f:format.date date="{tile.start}" format="{element.properties.dateFormat}" /></strong></p>
-                                        <p><sup><f:format.date date="{tile.start}" format="{element.properties.timeFormat}" /> <f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.oclock" /></sup></p>
+                                        <p><sup><f:format.date date="{tile.start}" format="{element.properties.timeFormat}" /> <f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.oclock" /></sup></p>
                                     </f:if>
                                     <f:if condition="{tile.hostImage}">
                                         <f:image image="{tile.hostImage}" class="img-fluid gotowebinar-tile__host-image" maxWidth="200" alt="{tile.hostName}" loading="lazy" />
                                     </f:if>
                                     <f:if condition="{tile.hostName}">
-                                        <p><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.with" arguments="{0: tile.hostName}" /></p>
+                                        <p><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.with" arguments="{0: tile.hostName}" /></p>
                                     </f:if>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -48,7 +48,7 @@
                                             errorClass="{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}"
                                         />
                                         <label class="{element.properties.checkLabelClassAttribute}" for="{element.uniqueIdentifier}-{iterator.index}">
-                                            <f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.select" />
+                                            <f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.select" />
                                             <span class="visually-hidden">: {tile.title}</span>
                                         </label>
                                     </div>
@@ -63,7 +63,7 @@
                     </f:for>
                 </f:then>
                 <f:else>
-                    <p class="gotowebinar-selection__empty"><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.empty" /></p>
+                    <p class="gotowebinar-selection__empty"><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.empty" /></p>
                 </f:else>
             </f:if>
             <f:if condition="{validationResults.flattenedErrors}">

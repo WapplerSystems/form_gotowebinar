@@ -1,0 +1,5 @@
+name: wapplersystems/form-gotowebinar
+priority: 543
+
+imports:
+  - { resource: 'EXT:form_gotowebinar/Configuration/Yaml/FormSetup.yaml' }

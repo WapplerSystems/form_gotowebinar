@@ -1,14 +1,14 @@
 <f:layout name="SystemEmail" />
-<f:section name="Title"><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.subject" /></f:section>
+<f:section name="Title"><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:mail.subject" /></f:section>
 <f:section name="Main">
-    <p><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.greeting" arguments="{0: registrant.firstName}" /></p>
-    <p><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.intro" /></p>
+    <p><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:mail.greeting" arguments="{0: registrant.firstName}" /></p>
+    <p><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:mail.intro" /></p>
     <f:for each="{registrations}" as="registration">
         <p>
             <strong>{registration.title}</strong><br>
             <f:if condition="{registration.start}"><f:format.date date="{registration.start}" format="d.m.Y, H:i" /><br></f:if>
-            <f:if condition="{registration.joinUrl}"><a href="{registration.joinUrl}"><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.join" /></a></f:if>
+            <f:if condition="{registration.joinUrl}"><a href="{registration.joinUrl}"><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:mail.join" /></a></f:if>
         </p>
     </f:for>
-    <p><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.outro" /></p>
+    <p><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:mail.outro" /></p>
 </f:section>

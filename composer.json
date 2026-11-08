@@ -1,5 +1,5 @@
 {
-	"name": "wapplersystems/goto-webinar",
+	"name": "wapplersystems/form-gotowebinar",
 	"type": "typo3-cms-extension",
 	"description": "GoTo Webinar registration for EXT:form: lists the upcoming webinars of a GoTo account as selectable tiles and registers the visitor for every ticked webinar via the GoTo API",
 	"license": "GPL-2.0-or-later",
@@ -30,17 +30,17 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"WapplerSystems\\GotoWebinar\\": "Classes"
+			"WapplerSystems\\FormGotowebinar\\": "Classes"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"WapplerSystems\\GotoWebinar\\Tests\\": "Tests"
+			"WapplerSystems\\FormGotowebinar\\Tests\\": "Tests"
 		}
 	},
 	"extra": {
 		"typo3/cms": {
-			"extension-key": "goto_webinar"
+			"extension-key": "form_gotowebinar"
 		}
 	}
 }

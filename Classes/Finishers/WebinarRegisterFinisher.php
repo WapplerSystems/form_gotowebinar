@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\Finishers;
+namespace WapplerSystems\FormGotowebinar\Finishers;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Mime\Address;
@@ -13,9 +13,9 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
 use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use WapplerSystems\GotoWebinar\GoTo\ApiException;
-use WapplerSystems\GotoWebinar\GoTo\Client;
-use WapplerSystems\GotoWebinar\Service\WebinarProvider;
+use WapplerSystems\FormGotowebinar\GoTo\ApiException;
+use WapplerSystems\FormGotowebinar\GoTo\Client;
+use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
 
 /**
  * Registers the visitor at GoTo for every webinar ticked in the
@@ -40,7 +40,7 @@ use WapplerSystems\GotoWebinar\Service\WebinarProvider;
  */
 class WebinarRegisterFinisher extends AbstractFinisher
 {
-    private const LLL = 'LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:';
+    private const LLL = 'LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:';
 
     /** GoTo standard fields of the v1.1 registrant format. */
     private const STANDARD_FIELDS = [
@@ -86,7 +86,7 @@ class WebinarRegisterFinisher extends AbstractFinisher
         $unknown = array_diff($selected, array_keys($tiles));
         if ($unknown !== []) {
             // Webinar ended or was taken off between page view and submit.
-            $this->logger?->notice('goto_webinar: ignoring webinars that are no longer offered', ['form' => $identifier, 'keys' => array_values($unknown)]);
+            $this->logger?->notice('form_gotowebinar: ignoring webinars that are no longer offered', ['form' => $identifier, 'keys' => array_values($unknown)]);
         }
         $selected = array_values(array_intersect($selected, array_keys($tiles)));
         if ($selected === []) {
@@ -117,7 +117,7 @@ class WebinarRegisterFinisher extends AbstractFinisher
                     $this->webinarProvider->markUnavailable($key);
                 }
                 $failed[] = $tile + ['closed' => $closed];
-                $this->logger?->error('goto_webinar: registration failed', [
+                $this->logger?->error('form_gotowebinar: registration failed', [
                     'form' => $identifier,
                     'webinar' => $key,
                     'email' => self::mask($email),
@@ -140,7 +140,7 @@ class WebinarRegisterFinisher extends AbstractFinisher
             throw new FinisherException('No GoTo registration succeeded', 1762560102);
         }
 
-        $this->logger?->info('goto_webinar: registered', [
+        $this->logger?->info('form_gotowebinar: registered', [
             'form' => $identifier,
             'email' => self::mask($email),
             'webinars' => array_column($registered, 'key'),
@@ -244,7 +244,7 @@ class WebinarRegisterFinisher extends AbstractFinisher
         } catch (\Throwable $e) {
             // The registrations are done and GoTo has the join links; a
             // failed summary mail must not turn that into an error page.
-            $this->logger?->error('goto_webinar: summary mail not sent', ['email' => self::mask($email), 'error' => $e->getMessage()]);
+            $this->logger?->error('form_gotowebinar: summary mail not sent', ['email' => self::mask($email), 'error' => $e->getMessage()]);
         }
     }
 

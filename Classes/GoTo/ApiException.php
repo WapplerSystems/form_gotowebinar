@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\GotoWebinar\GoTo;
+namespace WapplerSystems\FormGotowebinar\GoTo;
 
 /**
  * A GoTo API call that did not succeed. $status is the HTTP status (0 when
