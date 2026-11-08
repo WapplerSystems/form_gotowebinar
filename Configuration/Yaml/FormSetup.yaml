@@ -1,0 +1,113 @@
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formEditor:
+            translationFiles:
+              2370: 'EXT:goto_webinar/Resources/Private/Language/locallang.xlf'
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                partialRootPaths:
+                  2370: 'EXT:goto_webinar/Resources/Private/Frontend/Partials/'
+              formEditor:
+                editors:
+                  900:
+                    selectOptions:
+                      2370:
+                        value: GoToWebinarRegister
+                        label: 'GoTo Webinar - Register'
+                propertyCollections:
+                  finishers:
+                    2370:
+                      identifier: GoToWebinarRegister
+                      editors:
+                        100:
+                          identifier: header
+                          templateName: Inspector-CollectionElementHeaderEditor
+                          label: 'GoTo Webinar - Register'
+                        200:
+                          identifier: selectionField
+                          templateName: Inspector-TextEditor
+                          label: 'formEditor.finisher.goToWebinarRegister.selectionField'
+                          placeholder: 'webinars'
+                          propertyPath: options.selectionField
+                        300:
+                          identifier: fields
+                          templateName: Inspector-PropertyGridEditor
+                          label: 'formEditor.finisher.goToWebinarRegister.fields'
+                          fieldExplanationText: 'formEditor.finisher.goToWebinarRegister.fields.description'
+                          propertyPath: options.fields
+                          isSortable: false
+                          enableAddRow: true
+                          enableDeleteRow: true
+                          multiSelection: false
+                        9999:
+                          identifier: removeButton
+                          templateName: Inspector-RemoveElementEditor
+            GoToWebinarSelection:
+              implementationClassName: WapplerSystems\GotoWebinar\Form\FormElements\WebinarSelection
+              renderingOptions:
+                templateName: GoToWebinarSelection
+              properties:
+                containerClassAttribute: 'gotowebinar-selection'
+                tileClassAttribute: 'gotowebinar-tile bg-white p-4 mb-4'
+                checkLabelClassAttribute: 'btn btn-outline-primary btn-xs'
+                storagePid: ''
+                includeUnmanaged: true
+                subjectFilter: ''
+                dateFormat: 'd.m.Y'
+                timeFormat: 'H:i'
+              formEditor:
+                label: 'GoTo Webinar selection'
+                group: select
+                groupSorting: 2370
+                iconIdentifier: form-multi-checkbox
+                editors:
+                  100:
+                    identifier: header
+                    templateName: Inspector-FormElementHeaderEditor
+                  200:
+                    identifier: label
+                    templateName: Inspector-TextEditor
+                    label: formEditor.elements.FormElement.editor.label.label
+                    propertyPath: label
+                  300:
+                    identifier: storagePid
+                    templateName: Inspector-TextEditor
+                    label: 'formEditor.elements.GoToWebinarSelection.storagePid'
+                    propertyPath: properties.storagePid
+                  400:
+                    identifier: includeUnmanaged
+                    templateName: Inspector-CheckboxEditor
+                    label: 'formEditor.elements.GoToWebinarSelection.includeUnmanaged'
+                    propertyPath: properties.includeUnmanaged
+                  500:
+                    identifier: subjectFilter
+                    templateName: Inspector-TextEditor
+                    label: 'formEditor.elements.GoToWebinarSelection.subjectFilter'
+                    propertyPath: properties.subjectFilter
+                  700:
+                    identifier: requiredValidator
+                    templateName: Inspector-RequiredValidatorEditor
+                    label: formEditor.elements.FormElement.editor.requiredValidator.label
+                    validatorIdentifier: NotEmpty
+                  9999:
+                    identifier: removeButton
+                    templateName: Inspector-RemoveElementEditor
+                predefinedDefaults:
+                  properties:
+                    storagePid: ''
+                    includeUnmanaged: true
+                    subjectFilter: ''
+          finishersDefinition:
+            GoToWebinarRegister:
+              implementationClassName: WapplerSystems\GotoWebinar\Finishers\WebinarRegisterFinisher
+              formEditor:
+                iconIdentifier: form-finisher
+                label: 'GoTo Webinar - Register'
+                predefinedDefaults:
+                  options:
+                    selectionField: 'webinars'
+                    fields: {}

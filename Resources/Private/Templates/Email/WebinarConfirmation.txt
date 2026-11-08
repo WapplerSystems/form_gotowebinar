@@ -1,0 +1,9 @@
+<f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.greeting" arguments="{0: registrant.firstName}" />
+
+<f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.intro" />
+<f:for each="{registrations}" as="registration">
+{registration.title}
+<f:if condition="{registration.start}"><f:format.date date="{registration.start}" format="d.m.Y, H:i" /></f:if>
+<f:if condition="{registration.joinUrl}">{registration.joinUrl}</f:if>
+</f:for>
+<f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:mail.outro" />

@@ -1,0 +1,15 @@
+/* Ticked webinar: the button is filled and carries a check mark, so the
+   choice stays visible when the theme defines no active colours for
+   .btn-outline-* buttons. */
+.gotowebinar-tile .btn-check:checked + .btn {
+    background-color: var(--gotowebinar-checked-bg, var(--bs-primary, #183d46));
+    border-color: var(--gotowebinar-checked-bg, var(--bs-primary, #183d46));
+    color: var(--gotowebinar-checked-color, #fff);
+}
+.gotowebinar-tile .btn-check:checked + .btn::before {
+    content: "\2713\00a0";
+}
+.gotowebinar-tile .btn-check:focus-visible + .btn {
+    outline: 2px solid var(--gotowebinar-checked-bg, var(--bs-primary, #183d46));
+    outline-offset: 2px;
+}

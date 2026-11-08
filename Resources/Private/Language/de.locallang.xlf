@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:goto_webinar/Resources/Private/Language/locallang.xlf" date="2026-11-08T12:00:00Z" product-name="goto_webinar">
+		<header/>
+		<body>
+			<trans-unit id="element.select"><source>Register for this webinar</source><target>Für dieses Webinar anmelden</target></trans-unit>
+			<trans-unit id="element.oclock"><source></source><target>Uhr</target></trans-unit>
+			<trans-unit id="element.with"><source>With %s</source><target>Mit %s</target></trans-unit>
+			<trans-unit id="element.empty"><source>There are currently no upcoming dates.</source><target>Derzeit stehen keine weiteren Termine an.</target></trans-unit>
+			<trans-unit id="finisher.register.nothingSelected"><source>The selected webinars can no longer be booked. Please reload the page and choose again.</source><target>Die gewählten Webinare können nicht mehr gebucht werden. Bitte laden Sie die Seite neu und wählen Sie erneut.</target></trans-unit>
+			<trans-unit id="finisher.register.error"><source>Your registration could not be transmitted. Please try again later.</source><target>Ihre Anmeldung konnte leider nicht übermittelt werden. Bitte versuchen Sie es später noch einmal.</target></trans-unit>
+			<trans-unit id="finisher.register.partial"><source>The registration for the following webinars did not go through. Please try again later:</source><target>Für folgende Webinare hat die Anmeldung nicht geklappt. Bitte versuchen Sie es später noch einmal:</target></trans-unit>
+			<trans-unit id="finisher.register.closed"><source>The following webinars are fully booked or registration has closed:</source><target>Folgende Webinare sind leider ausgebucht oder die Anmeldung ist geschlossen:</target></trans-unit>
+			<trans-unit id="finisher.register.allClosed"><source>The selected webinars are fully booked or registration has closed. Please choose other dates.</source><target>Die gewählten Webinare sind leider ausgebucht oder die Anmeldung ist geschlossen. Bitte wählen Sie andere Termine.</target></trans-unit>
+			<trans-unit id="mail.subject"><source>Your webinar registration</source><target>Ihre Anmeldung zu den Webinaren</target></trans-unit>
+			<trans-unit id="mail.greeting"><source>Hello %s,</source><target>Hallo %s,</target></trans-unit>
+			<trans-unit id="mail.intro"><source>thank you for registering. You are registered for the following webinars:</source><target>vielen Dank für Ihre Anmeldung. Sie sind für folgende Webinare angemeldet:</target></trans-unit>
+			<trans-unit id="mail.join"><source>Join the webinar</source><target>Zum Webinar</target></trans-unit>
+			<trans-unit id="mail.outro"><source>Your personal link opens the webinar at the time given. Please do not pass it on.</source><target>Ihr persönlicher Link öffnet das Webinar zum angegebenen Termin. Bitte geben Sie ihn nicht weiter.</target></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.selectionField"><source>Identifier of the webinar selection element</source><target>Kennung des Webinar-Auswahlfelds</target></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.fields"><source>Further GoTo fields</source><target>Weitere GoTo-Felder</target></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.fields.description"><source>GoTo field name and value, e.g. organization: {company}</source><target>GoTo-Feldname und Wert, z. B. organization: {company}</target></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.storagePid"><source>Folder with webinar records (uid)</source><target>Ordner mit den Webinar-Datensätzen (uid)</target></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.includeUnmanaged"><source>Also show GoTo webinars without a record</source><target>Auch GoTo-Webinare ohne Datensatz anzeigen</target></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.subjectFilter"><source>Only webinars whose title contains</source><target>Nur Webinare, deren Titel enthält</target></trans-unit>
+		</body>
+	</file>
+</xliff>

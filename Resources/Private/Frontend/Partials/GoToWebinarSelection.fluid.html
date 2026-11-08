@@ -1,0 +1,79 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    One tile per bookable webinar, each with its own checkbox; layout as on
+    the hand-built LINEAR@WORK page: date, host | number, title, text | graphic.
+</f:comment>
+<formvh:renderRenderable renderable="{element}">
+    <f:asset.css identifier="gotowebinar-selection" href="EXT:goto_webinar/Resources/Public/Css/selection.css" />
+    <f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
+        <f:variable name="errorClass">{f:if(condition: '{validationResults.errors}', then: '{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}')}</f:variable>
+        <fieldset id="{element.uniqueIdentifier}" class="{element.properties.containerClassAttribute} {errorClass}">
+            <f:if condition="{element.label}">
+                <legend class="visually-hidden">{formvh:translateElementProperty(element: element, property: 'label')}</legend>
+            </f:if>
+            <f:if condition="{element.properties.tiles}">
+                <f:then>
+                    <f:for each="{element.properties.tiles}" as="tile" iteration="iterator">
+                        <div class="{element.properties.tileClassAttribute}">
+                            <div class="row g-4">
+                                <div class="col-12 col-md-3 gotowebinar-tile__meta">
+                                    <f:if condition="{tile.start}">
+                                        <p class="mb-0"><strong><f:format.date date="{tile.start}" format="{element.properties.dateFormat}" /></strong></p>
+                                        <p><sup><f:format.date date="{tile.start}" format="{element.properties.timeFormat}" /> <f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.oclock" /></sup></p>
+                                    </f:if>
+                                    <f:if condition="{tile.hostImage}">
+                                        <f:image image="{tile.hostImage}" class="img-fluid gotowebinar-tile__host-image" maxWidth="200" alt="{tile.hostName}" loading="lazy" />
+                                    </f:if>
+                                    <f:if condition="{tile.hostName}">
+                                        <p><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.with" arguments="{0: tile.hostName}" /></p>
+                                    </f:if>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <f:if condition="{tile.label}">
+                                        <p class="c-light-green-l2"><strong>{tile.label}</strong></p>
+                                    </f:if>
+                                    <p><strong>{tile.title}</strong></p>
+                                    <f:if condition="{tile.descriptionHtml}">
+                                        <f:then><f:format.html>{tile.descriptionHtml}</f:format.html></f:then>
+                                        <f:else if="{tile.descriptionText}"><p><f:format.nl2br>{tile.descriptionText}</f:format.nl2br></p></f:else>
+                                    </f:if>
+                                    <div class="gotowebinar-tile__check">
+                                        <f:comment>btn-check: the checkbox is visually the button, checked = filled</f:comment>
+                                        <f:form.checkbox
+                                            property="{element.identifier}"
+                                            multiple="1"
+                                            id="{element.uniqueIdentifier}-{iterator.index}"
+                                            class="btn-check"
+                                            value="{tile.key}"
+                                            errorClass="{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}"
+                                        />
+                                        <label class="{element.properties.checkLabelClassAttribute}" for="{element.uniqueIdentifier}-{iterator.index}">
+                                            <f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.select" />
+                                            <span class="visually-hidden">: {tile.title}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <f:if condition="{tile.image}">
+                                        <f:image image="{tile.image}" class="img-fluid gotowebinar-tile__image" maxWidth="600" alt="{tile.image.alternative}" loading="lazy" />
+                                    </f:if>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </f:then>
+                <f:else>
+                    <p class="gotowebinar-selection__empty"><f:translate key="LLL:EXT:goto_webinar/Resources/Private/Language/locallang.xlf:element.empty" /></p>
+                </f:else>
+            </f:if>
+            <f:if condition="{validationResults.flattenedErrors}">
+                <div class="{element.rootForm.renderingOptions.fieldProperties.errorMsgClassAttribute}" role="alert">
+                    <f:for each="{validationResults.errors}" as="error">
+                        <f:format.htmlspecialchars>{formvh:translateElementError(element: element, error: error)}</f:format.htmlspecialchars><br/>
+                    </f:for>
+                </div>
+            </f:if>
+        </fieldset>
+    </f:form.validationResults>
+</formvh:renderRenderable>
+</html>

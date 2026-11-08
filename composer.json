@@ -1,0 +1,46 @@
+{
+	"name": "wapplersystems/goto-webinar",
+	"type": "typo3-cms-extension",
+	"description": "GoTo Webinar registration for EXT:form: lists the upcoming webinars of a GoTo account as selectable tiles and registers the visitor for every ticked webinar via the GoTo API",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"TYPO3",
+		"typo3-extension",
+		"goto",
+		"gotowebinar",
+		"webinar",
+		"form",
+		"finisher"
+	],
+	"authors": [
+		{
+			"name": "Sven Wappler",
+			"email": "info@wappler.systems",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^8.2",
+		"typo3/cms-core": "^14",
+		"typo3/cms-form": "^14"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^11.5 || ^12.0",
+		"typo3/testing-framework": "^9.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"WapplerSystems\\GotoWebinar\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"WapplerSystems\\GotoWebinar\\Tests\\": "Tests"
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "goto_webinar"
+		}
+	}
+}

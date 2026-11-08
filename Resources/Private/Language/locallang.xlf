@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:goto_webinar/Resources/Private/Language/locallang.xlf" date="2026-11-08T12:00:00Z" product-name="goto_webinar">
+		<header/>
+		<body>
+			<trans-unit id="element.select"><source>Register for this webinar</source></trans-unit>
+			<trans-unit id="element.oclock"><source></source></trans-unit>
+			<trans-unit id="element.with"><source>With %s</source></trans-unit>
+			<trans-unit id="element.empty"><source>There are currently no upcoming dates.</source></trans-unit>
+			<trans-unit id="finisher.register.nothingSelected"><source>The selected webinars can no longer be booked. Please reload the page and choose again.</source></trans-unit>
+			<trans-unit id="finisher.register.error"><source>Your registration could not be transmitted. Please try again later.</source></trans-unit>
+			<trans-unit id="finisher.register.partial"><source>The registration for the following webinars did not go through. Please try again later:</source></trans-unit>
+			<trans-unit id="finisher.register.closed"><source>The following webinars are fully booked or registration has closed:</source></trans-unit>
+			<trans-unit id="finisher.register.allClosed"><source>The selected webinars are fully booked or registration has closed. Please choose other dates.</source></trans-unit>
+			<trans-unit id="mail.subject"><source>Your webinar registration</source></trans-unit>
+			<trans-unit id="mail.greeting"><source>Hello %s,</source></trans-unit>
+			<trans-unit id="mail.intro"><source>thank you for registering. You are registered for the following webinars:</source></trans-unit>
+			<trans-unit id="mail.join"><source>Join the webinar</source></trans-unit>
+			<trans-unit id="mail.outro"><source>Your personal link opens the webinar at the time given. Please do not pass it on.</source></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.selectionField"><source>Identifier of the webinar selection element</source></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.fields"><source>Further GoTo fields</source></trans-unit>
+			<trans-unit id="formEditor.finisher.goToWebinarRegister.fields.description"><source>GoTo field name and value, e.g. organization: {company}</source></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.storagePid"><source>Folder with webinar records (uid)</source></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.includeUnmanaged"><source>Also show GoTo webinars without a record</source></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.subjectFilter"><source>Only webinars whose title contains</source></trans-unit>
+		</body>
+	</file>
+</xliff>

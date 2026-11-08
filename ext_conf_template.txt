@@ -1,0 +1,14 @@
+# cat=basic; type=string; label=OAuth client id of the GoTo developer app. Leave empty to read the environment variable GOTO_CLIENT_ID instead.
+clientId =
+# cat=basic; type=string; label=OAuth client secret of the GoTo developer app. Leave empty to read the environment variable GOTO_CLIENT_SECRET instead.
+clientSecret =
+# cat=basic; type=string; label=Redirect URI registered in the GoTo developer app (used once by gotowebinar:connect)
+redirectUri =
+# cat=basic; type=string; label=Organizer key. Normally filled by gotowebinar:connect; only set it to use another organizer of the account.
+organizerKey =
+# cat=advanced; type=string; label=API base URL. Only change for tests against a mock server.
+apiBaseUrl = https://api.getgo.com/G2W/rest/v2
+# cat=advanced; type=string; label=Authentication base URL. Only change for tests against a mock server.
+authBaseUrl = https://authentication.logmeininc.com
+# cat=advanced; type=int+; label=Seconds the webinar list is cached
+cacheLifetime = 600
