@@ -17,16 +17,26 @@ GoTo then lists the person as a normal registrant with a personal join link.
 ## Setup
 
 1. Create an OAuth client in the GoTo developer center
-   (<https://developer.goto.com/>), scope for GoTo Webinar, with a redirect URI
-   on the site (any page works, only the `code` parameter is read).
-2. Extension configuration `form_gotowebinar`: `clientId`, `clientSecret`,
-   `redirectUri` (or env `GOTO_CLIENT_ID` / `GOTO_CLIENT_SECRET`).
-3. `vendor/bin/typo3 gotowebinar:connect`: open the printed URL, log in as an
-   organizer, paste the URL GoTo redirects to. Tokens go to sys_registry.
+   (<https://developer.logmeininc.com/clients>) with the GoTo Webinar scope.
+2. Extension configuration `form_gotowebinar`: `clientId`, `clientSecret`
+   (or env `GOTO_CLIENT_ID` / `GOTO_CLIENT_SECRET`).
+3. Connect, one of:
+   - **Personal access token** (no browser login): an organizer creates a
+     token at myaccount.goto.com → Developer Tools; the OAuth client needs the
+     grant type "Personal Access Token" switched on and exactly the scopes of
+     the token (e.g. also `identity:scim.me`, which is used to find the
+     organizer key). `vendor/bin/typo3 gotowebinar:connect --pat=<token>`.
+     A new access token is minted from it whenever the old one ran out.
+   - **Authorization code**: set `redirectUri` (any page of the site, only the
+     `code` parameter is read), run `vendor/bin/typo3 gotowebinar:connect`,
+     open the printed URL, log in as an organizer, paste the URL GoTo
+     redirects to.
+
+   Tokens go to sys_registry, never into a file.
 4. `vendor/bin/typo3 gotowebinar:status --fields` lists the upcoming webinars,
    their keys and the fields/questions their registration requires.
-5. Cron, daily: `vendor/bin/typo3 gotowebinar:status` keeps the refresh token
-   in use when nobody visits the page.
+5. Cron, daily: `vendor/bin/typo3 gotowebinar:status` keeps the connection in
+   use and the fallback list fresh when nobody visits the page.
 
 ## Form definition
 

@@ -20,6 +20,10 @@ use WapplerSystems\FormGotowebinar\Service\WebinarProvider;
  * URL, logs in, and GoTo redirects to the configured redirect URI with
  * ?code=... in the address bar. That code (or the whole URL) goes back
  * into this command; from then on the refresh token keeps the connection.
+ *
+ * Alternatively --pat takes a personal access token of a GoTo user
+ * (myaccount.goto.com → Developer Tools). That needs no browser login, but
+ * the developer app must have the grant type "Personal Access Token" enabled.
  */
 #[AsCommand(name: 'gotowebinar:connect', description: 'Connect the site with a GoTo Webinar account (OAuth authorization code flow)')]
 class ConnectCommand extends Command
@@ -35,6 +39,7 @@ class ConnectCommand extends Command
     protected function configure(): void
     {
         $this->addOption('code', null, InputOption::VALUE_REQUIRED, 'Authorization code, or the complete redirect URL containing it');
+        $this->addOption('pat', null, InputOption::VALUE_REQUIRED, 'Personal access token of a GoTo user, instead of the authorization code flow');
         $this->addOption('disconnect', null, InputOption::VALUE_NONE, 'Forget the stored tokens');
     }
 
@@ -51,6 +56,18 @@ class ConnectCommand extends Command
         if (!$this->client->hasCredentials()) {
             $io->error('Set clientId and clientSecret in the extension configuration of form_gotowebinar (or GOTO_CLIENT_ID / GOTO_CLIENT_SECRET) first.');
             return Command::FAILURE;
+        }
+
+        $pat = trim((string)$input->getOption('pat'));
+        if ($pat !== '') {
+            try {
+                $response = $this->client->connectWithPersonalAccessToken($pat);
+            } catch (ApiException $e) {
+                $io->error($e->getMessage() . ($e->body !== '' ? "\n" . $e->body : ''));
+                return Command::FAILURE;
+            }
+            $this->webinarProvider->flush();
+            return $this->report($io, $response);
         }
 
         $code = (string)$input->getOption('code');
@@ -74,7 +91,14 @@ class ConnectCommand extends Command
             return Command::FAILURE;
         }
         $this->webinarProvider->flush();
+        return $this->report($io, $response);
+    }
 
+    /**
+     * @param array<string, mixed> $response
+     */
+    private function report(SymfonyStyle $io, array $response): int
+    {
         if (empty($response['organizer_key']) && !$this->client->isConnected()) {
             $io->warning('Connected, but GoTo did not return an organizer key. Set organizerKey in the extension configuration.');
             return Command::SUCCESS;

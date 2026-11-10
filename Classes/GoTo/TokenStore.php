@@ -37,6 +37,25 @@ class TokenStore
         return (string)$this->registry->get(self::NAMESPACE, 'organizerKey', '');
     }
 
+    /**
+     * Personal access token of a GoTo user. Unlike the refresh token it does
+     * not rotate: every access token is minted from it again.
+     */
+    public function personalAccessToken(): string
+    {
+        return (string)$this->registry->get(self::NAMESPACE, 'personalAccessToken', '');
+    }
+
+    public function storePersonalAccessToken(string $pat): void
+    {
+        $this->registry->set(self::NAMESPACE, 'personalAccessToken', $pat);
+    }
+
+    public function storeOrganizerKey(string $organizerKey): void
+    {
+        $this->registry->set(self::NAMESPACE, 'organizerKey', $organizerKey);
+    }
+
     public function principal(): string
     {
         return (string)$this->registry->get(self::NAMESPACE, 'principal', '');

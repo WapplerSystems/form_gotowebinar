@@ -14,9 +14,11 @@ use TYPO3\CMS\Core\Locking\LockingStrategyInterface;
 /**
  * GoTo Webinar API v2 client for the few calls the registration needs.
  *
- * Authentication is OAuth 2 with the authorization code flow: an organizer
- * grants access once (gotowebinar:connect), afterwards the stored refresh
- * token is exchanged for access tokens without any login.
+ * Authentication is OAuth 2, either with the authorization code flow (an
+ * organizer grants access once, afterwards the stored refresh token is
+ * exchanged for access tokens) or with a personal access token of a GoTo
+ * user, which is exchanged for a new access token whenever the old one ran
+ * out. Both are set up with gotowebinar:connect.
  *
  * Client id and secret come from the extension configuration or, if empty,
  * from GOTO_CLIENT_ID / GOTO_CLIENT_SECRET.
@@ -37,7 +39,9 @@ class Client
 
     public function isConnected(): bool
     {
-        return $this->hasCredentials() && $this->tokenStore->refreshToken() !== '' && $this->organizerKey() !== '';
+        return $this->hasCredentials()
+            && ($this->tokenStore->refreshToken() !== '' || $this->tokenStore->personalAccessToken() !== '')
+            && $this->organizerKey() !== '';
     }
 
     public function authorizeUrl(string $state = ''): string
@@ -66,6 +70,37 @@ class Client
             'redirect_uri' => $this->redirectUri(),
         ]);
         $this->tokenStore->storeTokenResponse($response);
+        return $response;
+    }
+
+    /**
+     * Exchanges a personal access token (myaccount.goto.com → Developer Tools)
+     * for an access token and keeps it for later exchanges. The token response
+     * carries no organizer key, so it is looked up via the SCIM user of the
+     * token owner unless it is configured.
+     *
+     * @return array<string, mixed> token response, plus organizer_key if found
+     */
+    public function connectWithPersonalAccessToken(string $pat): array
+    {
+        $response = $this->tokenRequest([
+            'grant_type' => 'personal_access_token',
+            'pat' => $pat,
+        ]);
+        $this->tokenStore->storePersonalAccessToken($pat);
+        $this->tokenStore->storeTokenResponse($response);
+        if ($this->organizerKey() === '') {
+            $user = $this->request($this->identityBaseUrl() . '/Users/me', 'GET', [
+                'headers' => ['Authorization' => 'Bearer ' . $response['access_token'], 'Accept' => 'application/json'],
+                'timeout' => 10,
+                'http_errors' => false,
+            ]);
+            $id = $user->getStatusCode() === 200 ? (string)(self::decode((string)$user->getBody())['id'] ?? '') : '';
+            if ($id !== '') {
+                $this->tokenStore->storeOrganizerKey($id);
+                $response['organizer_key'] = $id;
+            }
+        }
         return $response;
     }
 
@@ -247,13 +282,15 @@ class Client
                 return $token;
             }
             $refreshToken = $this->tokenStore->refreshToken();
-            if ($refreshToken === '') {
-                throw new ApiException('No GoTo refresh token stored. Run "typo3 gotowebinar:connect".', 0, '', 1762560003);
+            $pat = $this->tokenStore->personalAccessToken();
+            if ($refreshToken !== '') {
+                $form = ['grant_type' => 'refresh_token', 'refresh_token' => $refreshToken];
+            } elseif ($pat !== '') {
+                $form = ['grant_type' => 'personal_access_token', 'pat' => $pat];
+            } else {
+                throw new ApiException('No GoTo refresh or personal access token stored. Run "typo3 gotowebinar:connect".', 0, '', 1762560003);
             }
-            $response = $this->tokenRequest([
-                'grant_type' => 'refresh_token',
-                'refresh_token' => $refreshToken,
-            ]);
+            $response = $this->tokenRequest($form);
             $this->tokenStore->storeTokenResponse($response);
             return (string)($response['access_token'] ?? '');
         } finally {
@@ -350,6 +387,12 @@ class Client
     {
         $url = trim((string)$this->setting('apiBaseUrl'));
         return rtrim($url !== '' ? $url : 'https://api.getgo.com/G2W/rest/v2', '/');
+    }
+
+    private function identityBaseUrl(): string
+    {
+        $url = trim((string)$this->setting('identityBaseUrl'));
+        return rtrim($url !== '' ? $url : 'https://api.getgo.com/identity/v1', '/');
     }
 
     private function authBaseUrl(): string
