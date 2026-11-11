@@ -54,9 +54,12 @@ TYPO3:
                 containerClassAttribute: 'gotowebinar-selection'
                 tileClassAttribute: 'gotowebinar-tile bg-white p-4 mb-4'
                 checkLabelClassAttribute: 'btn btn-outline-primary btn-xs'
+                selectAllClassAttribute: 'btn btn-primary'
                 storagePid: ''
                 includeUnmanaged: true
                 subjectFilter: ''
+                showEnded: false
+                showSelectAll: false
                 dateFormat: 'd.m.Y'
                 timeFormat: 'H:i'
               formEditor:
@@ -88,6 +91,16 @@ TYPO3:
                     templateName: Inspector-TextEditor
                     label: 'formEditor.elements.GoToWebinarSelection.subjectFilter'
                     propertyPath: properties.subjectFilter
+                  550:
+                    identifier: showEnded
+                    templateName: Inspector-CheckboxEditor
+                    label: 'formEditor.elements.GoToWebinarSelection.showEnded'
+                    propertyPath: properties.showEnded
+                  560:
+                    identifier: showSelectAll
+                    templateName: Inspector-CheckboxEditor
+                    label: 'formEditor.elements.GoToWebinarSelection.showSelectAll'
+                    propertyPath: properties.showSelectAll
                   700:
                     identifier: requiredValidator
                     templateName: Inspector-RequiredValidatorEditor
@@ -101,6 +114,8 @@ TYPO3:
                     storagePid: ''
                     includeUnmanaged: true
                     subjectFilter: ''
+                    showEnded: false
+                    showSelectAll: false
           finishersDefinition:
             GoToWebinarRegister:
               implementationClassName: WapplerSystems\FormGotowebinar\Finishers\WebinarRegisterFinisher

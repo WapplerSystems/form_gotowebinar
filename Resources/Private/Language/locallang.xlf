@@ -6,6 +6,8 @@
 			<trans-unit id="element.select"><source>Register for this webinar</source></trans-unit>
 			<trans-unit id="element.oclock"><source></source></trans-unit>
 			<trans-unit id="element.with"><source>With %s</source></trans-unit>
+			<trans-unit id="element.selectAll"><source>Register for all webinars</source></trans-unit>
+			<trans-unit id="element.ended"><source>This webinar has already taken place.</source></trans-unit>
 			<trans-unit id="element.empty"><source>There are currently no upcoming dates.</source></trans-unit>
 			<trans-unit id="finisher.register.nothingSelected"><source>The selected webinars can no longer be booked. Please reload the page and choose again.</source></trans-unit>
 			<trans-unit id="finisher.register.error"><source>Your registration could not be transmitted. Please try again later.</source></trans-unit>
@@ -23,6 +25,8 @@
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.storagePid"><source>Folder with webinar records (uid)</source></trans-unit>
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.includeUnmanaged"><source>Also show GoTo webinars without a record</source></trans-unit>
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.subjectFilter"><source>Only webinars whose title contains</source></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.showEnded"><source>Also list webinars that have taken place (without registration)</source></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.showSelectAll"><source>Show "Register for all webinars" button</source></trans-unit>
 		</body>
 	</file>
 </xliff>

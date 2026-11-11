@@ -13,3 +13,14 @@
     outline: 2px solid var(--gotowebinar-checked-bg, var(--bs-primary, #183d46));
     outline-offset: 2px;
 }
+
+.gotowebinar-selection__all {
+    margin-bottom: 1.5rem;
+}
+/* Webinar has taken place: tile stays, but steps back. */
+.gotowebinar-tile--ended .gotowebinar-tile__ended {
+    font-style: italic;
+}
+.gotowebinar-tile--ended img {
+    filter: grayscale(1);
+}

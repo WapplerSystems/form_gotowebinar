@@ -103,4 +103,24 @@ class TokenStore
     {
         $this->registry->set(self::NAMESPACE, 'lastWebinars', $webinars);
     }
+
+    /**
+     * All webinars seen in GoTo's list, including those that have ended
+     * since; source for listing past dates.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function knownWebinars(): array
+    {
+        $value = $this->registry->get(self::NAMESPACE, 'knownWebinars');
+        return is_array($value) ? $value : [];
+    }
+
+    /**
+     * @param list<array<string, mixed>> $webinars
+     */
+    public function storeKnownWebinars(array $webinars): void
+    {
+        $this->registry->set(self::NAMESPACE, 'knownWebinars', $webinars);
+    }
 }

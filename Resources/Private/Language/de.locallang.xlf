@@ -6,6 +6,8 @@
 			<trans-unit id="element.select"><source>Register for this webinar</source><target>Für dieses Webinar anmelden</target></trans-unit>
 			<trans-unit id="element.oclock"><source></source><target>Uhr</target></trans-unit>
 			<trans-unit id="element.with"><source>With %s</source><target>Mit %s</target></trans-unit>
+			<trans-unit id="element.selectAll"><source>Register for all webinars</source><target>Zu allen Webinaren anmelden</target></trans-unit>
+			<trans-unit id="element.ended"><source>This webinar has already taken place.</source><target>Dieses Webinar hat bereits stattgefunden.</target></trans-unit>
 			<trans-unit id="element.empty"><source>There are currently no upcoming dates.</source><target>Derzeit stehen keine weiteren Termine an.</target></trans-unit>
 			<trans-unit id="finisher.register.nothingSelected"><source>The selected webinars can no longer be booked. Please reload the page and choose again.</source><target>Die gewählten Webinare können nicht mehr gebucht werden. Bitte laden Sie die Seite neu und wählen Sie erneut.</target></trans-unit>
 			<trans-unit id="finisher.register.error"><source>Your registration could not be transmitted. Please try again later.</source><target>Ihre Anmeldung konnte leider nicht übermittelt werden. Bitte versuchen Sie es später noch einmal.</target></trans-unit>
@@ -23,6 +25,8 @@
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.storagePid"><source>Folder with webinar records (uid)</source><target>Ordner mit den Webinar-Datensätzen (uid)</target></trans-unit>
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.includeUnmanaged"><source>Also show GoTo webinars without a record</source><target>Auch GoTo-Webinare ohne Datensatz anzeigen</target></trans-unit>
 			<trans-unit id="formEditor.elements.GoToWebinarSelection.subjectFilter"><source>Only webinars whose title contains</source><target>Nur Webinare, deren Titel enthält</target></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.showEnded"><source>Also list webinars that have taken place (without registration)</source><target>Vergangene Webinare weiter anzeigen (ohne Anmeldung)</target></trans-unit>
+			<trans-unit id="formEditor.elements.GoToWebinarSelection.showSelectAll"><source>Show "Register for all webinars" button</source><target>Schaltfläche „Zu allen Webinaren anmelden“ anzeigen</target></trans-unit>
 		</body>
 	</file>
 </xliff>

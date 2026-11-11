@@ -24,13 +24,17 @@ use WapplerSystems\FormGotowebinar\GoTo\TokenStore;
  * maintain in TYPO3 (graphic, host, own text).
  *
  * GoTo is the source for what can be booked: a record whose webinar is
- * over, cancelled or full does not show up. The record only adds the
- * presentation.
+ * over, cancelled or full cannot be booked. The record only adds the
+ * presentation. Ended webinars can still be listed (without a checkbox);
+ * GoTo's list holds only future dates, so they come from the webinars
+ * remembered from earlier fetches.
  */
 class WebinarProvider
 {
     public const TABLE = 'tx_formgotowebinar_webinar';
     private const CACHE_KEY = 'upcoming';
+    /** Ended webinars are listed for this long. */
+    private const KEEP_ENDED = '-12 months';
 
     public function __construct(
         private readonly Client $client,
@@ -56,7 +60,7 @@ class WebinarProvider
             try {
                 $now = new \DateTimeImmutable();
                 $webinars = $this->client->upcomingWebinars($now, $now->modify('+18 months'));
-                $this->tokenStore->storeLastWebinars($webinars);
+                $this->storeFetched($webinars);
                 $this->cache->set(self::CACHE_KEY, $webinars, [], $this->cacheLifetime());
             } catch (ApiException $e) {
                 $this->logger->error('form_gotowebinar: webinar list not fetched, using the last known list', [
@@ -74,6 +78,64 @@ class WebinarProvider
             $webinars,
             static fn(array $w): bool => ($w['endTime'] ?? '') >= $now && !in_array($w['webinarKey'], $unavailable, true)
         ));
+    }
+
+    /**
+     * Webinars that have taken place, oldest first.
+     *
+     * @return list<array<string, string>>
+     */
+    public function endedWebinars(): array
+    {
+        $now = gmdate('Y-m-d\TH:i:s\Z');
+        return array_values(array_filter(
+            $this->tokenStore->knownWebinars(),
+            static fn(array $w): bool => ($w['endTime'] ?? '') < $now
+        ));
+    }
+
+    /**
+     * Keeps a freshly fetched list: as fallback for API errors and in the
+     * memory the ended webinars are taken from.
+     *
+     * @param list<array<string, string>> $webinars
+     */
+    public function storeFetched(array $webinars): void
+    {
+        $this->tokenStore->storeLastWebinars($webinars);
+        $this->tokenStore->storeKnownWebinars(self::remember(
+            $this->tokenStore->knownWebinars(),
+            $webinars,
+            gmdate('Y-m-d\TH:i:s\Z'),
+            gmdate('Y-m-d\TH:i:s\Z', (int)strtotime(self::KEEP_ENDED)),
+        ));
+    }
+
+    /**
+     * Adds a fetched list to the remembered webinars. A remembered webinar
+     * that has not ended but is missing from GoTo's list was cancelled and
+     * is dropped, so it never turns up as "taken place"; ended ones are
+     * kept until $keepSince.
+     *
+     * @param list<array<string, string>> $known
+     * @param list<array<string, string>> $fetched
+     * @return list<array<string, string>> date order
+     */
+    public static function remember(array $known, array $fetched, string $now, string $keepSince): array
+    {
+        $byKey = [];
+        foreach ($known as $webinar) {
+            $end = $webinar['endTime'] ?? '';
+            if ($end !== '' && $end < $now && $end >= $keepSince) {
+                $byKey[$webinar['webinarKey']] = $webinar;
+            }
+        }
+        foreach ($fetched as $webinar) {
+            $byKey[$webinar['webinarKey']] = $webinar;
+        }
+        $webinars = array_values($byKey);
+        usort($webinars, static fn(array $a, array $b): int => strcmp($a['startTime'], $b['startTime']));
+        return $webinars;
     }
 
     /**
@@ -100,16 +162,22 @@ class WebinarProvider
      * @param int[] $storagePids folders holding the webinar records
      * @param bool $includeUnmanaged also show GoTo webinars without a record
      * @param string $subjectFilter unmanaged webinars only if their subject contains this
+     * @param bool $includeEnded also list webinars that have taken place, not bookable
      * @return list<array<string, mixed>>
      */
-    public function tiles(array $storagePids, bool $includeUnmanaged = true, string $subjectFilter = ''): array
+    public function tiles(array $storagePids, bool $includeUnmanaged = true, string $subjectFilter = '', bool $includeEnded = false): array
     {
         $records = $storagePids !== [] ? $this->records($storagePids) : [];
-        return self::merge($this->upcomingWebinars(), $records, $includeUnmanaged, $subjectFilter);
+        $webinars = $this->upcomingWebinars();
+        if ($includeEnded) {
+            $ended = array_map(static fn(array $w): array => $w + ['ended' => true], $this->endedWebinars());
+            $webinars = array_merge($ended, $webinars);
+        }
+        return self::merge($webinars, $records, $includeUnmanaged, $subjectFilter);
     }
 
     /**
-     * @param list<array<string, string>> $webinars GoTo webinars, date order
+     * @param list<array<string, mixed>> $webinars GoTo webinars, date order; "ended" marks those that took place
      * @param list<array<string, mixed>> $records webinar records
      * @return list<array<string, mixed>>
      */
@@ -138,6 +206,7 @@ class WebinarProvider
             $tiles[] = [
                 'key' => $webinar['webinarKey'],
                 'managed' => $record !== null,
+                'bookable' => empty($webinar['ended']),
                 'title' => trim((string)($record['title'] ?? '')) ?: $webinar['subject'],
                 'label' => trim((string)($record['label'] ?? '')),
                 // Record text is RTE HTML, GoTo's description plain text.

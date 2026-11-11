@@ -2,9 +2,14 @@
 <f:comment>
     One tile per bookable webinar, each with its own checkbox; layout as on
     the hand-built LINEAR@WORK page: date, host | number, title, text | graphic.
+    Webinars that have taken place (showEnded) keep their tile but get a note
+    instead of the checkbox.
 </f:comment>
 <formvh:renderRenderable renderable="{element}">
     <f:asset.css identifier="gotowebinar-selection" href="EXT:form_gotowebinar/Resources/Public/Css/selection.css" />
+    <f:if condition="{element.properties.showSelectAll} && {element.properties.bookableCount} > 1">
+        <f:asset.script identifier="gotowebinar-selection" src="EXT:form_gotowebinar/Resources/Public/JavaScript/selection.js" defer="1" />
+    </f:if>
     <f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
         <f:variable name="errorClass">{f:if(condition: '{validationResults.errors}', then: '{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}')}</f:variable>
         <fieldset id="{element.uniqueIdentifier}" class="{element.properties.containerClassAttribute} {errorClass}">
@@ -13,8 +18,15 @@
             </f:if>
             <f:if condition="{element.properties.tiles}">
                 <f:then>
+                    <f:if condition="{element.properties.showSelectAll} && {element.properties.bookableCount} > 1">
+                        <div class="gotowebinar-selection__all">
+                            <button type="button" class="{element.properties.selectAllClassAttribute}" data-gotowebinar-select-all="1" aria-controls="{element.uniqueIdentifier}">
+                                <f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.selectAll" />
+                            </button>
+                        </div>
+                    </f:if>
                     <f:for each="{element.properties.tiles}" as="tile" iteration="iterator">
-                        <div class="{element.properties.tileClassAttribute}">
+                        <div class="{element.properties.tileClassAttribute}{f:if(condition: tile.bookable, else: ' gotowebinar-tile--ended')}">
                             <div class="row g-4">
                                 <div class="col-12 col-md-3 gotowebinar-tile__meta">
                                     <f:if condition="{tile.start}">
@@ -37,6 +49,8 @@
                                         <f:then><f:format.html>{tile.descriptionHtml}</f:format.html></f:then>
                                         <f:else if="{tile.descriptionText}"><p><f:format.nl2br>{tile.descriptionText}</f:format.nl2br></p></f:else>
                                     </f:if>
+                                    <f:if condition="{tile.bookable}">
+                                    <f:then>
                                     <div class="gotowebinar-tile__check">
                                         <f:comment>btn-check: the checkbox is visually the button, checked = filled</f:comment>
                                         <f:form.checkbox
@@ -52,6 +66,11 @@
                                             <span class="visually-hidden">: {tile.title}</span>
                                         </label>
                                     </div>
+                                    </f:then>
+                                    <f:else>
+                                        <p class="gotowebinar-tile__ended"><f:translate key="LLL:EXT:form_gotowebinar/Resources/Private/Language/locallang.xlf:element.ended" /></p>
+                                    </f:else>
+                                    </f:if>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <f:if condition="{tile.image}">

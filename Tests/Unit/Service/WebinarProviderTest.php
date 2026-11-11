@@ -48,4 +48,28 @@ final class WebinarProviderTest extends TestCase
         $records = [['webinar_key' => '1', 'title' => '', 'label' => '', 'description' => '', 'host_name' => '']];
         self::assertSame(['1'], array_column(WebinarProvider::merge(self::WEBINARS, $records, false, ''), 'key'));
     }
+
+    #[Test]
+    public function endedWebinarIsListedButNotBookable(): void
+    {
+        $webinars = [['ended' => true] + self::WEBINARS[0], self::WEBINARS[2]];
+        $tiles = WebinarProvider::merge($webinars, [], true, '');
+
+        self::assertSame(['1', '2'], array_column($tiles, 'key'));
+        self::assertFalse($tiles[0]['bookable']);
+        self::assertTrue($tiles[1]['bookable']);
+    }
+
+    #[Test]
+    public function rememberKeepsEndedAndDropsCancelledWebinars(): void
+    {
+        $now = '2026-11-20T00:00:00Z';
+        // 1 has ended, 99 was cancelled (missing in the new list, not ended), 2 is still listed
+        $known = WebinarProvider::remember(self::WEBINARS, [self::WEBINARS[2]], $now, '2025-11-30T00:00:00Z');
+        self::assertSame(['1', '2'], array_column($known, 'webinarKey'));
+
+        $old = ['webinarKey' => '0', 'subject' => 'Alt', 'description' => '', 'startTime' => '2025-01-01T09:00:00Z', 'endTime' => '2025-01-01T10:00:00Z', 'timeZone' => 'Europe/Berlin', 'registrationUrl' => ''];
+        $known = WebinarProvider::remember([$old, ...$known], [], $now, '2025-11-30T00:00:00Z');
+        self::assertSame(['1'], array_column($known, 'webinarKey'), 'ended before the keep date is forgotten; 2 not listed any more and not ended = cancelled');
+    }
 }

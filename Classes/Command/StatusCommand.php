@@ -51,7 +51,7 @@ class StatusCommand extends Command
             return Command::FAILURE;
         }
         $this->webinarProvider->flush();
-        $this->tokenStore->storeLastWebinars($webinars);
+        $this->webinarProvider->storeFetched($webinars);
 
         $io->writeln('Connected as ' . ($this->tokenStore->principal() ?: 'unknown principal'));
         $rows = [];

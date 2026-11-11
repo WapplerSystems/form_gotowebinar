@@ -209,7 +209,9 @@ class WebinarRegisterFinisher extends AbstractFinisher
         $element = $formRuntime->getFormDefinition()->getElementByIdentifier((string)$this->parseOption('selectionField'));
         $tiles = [];
         foreach ((array)($element?->getProperties()['tiles'] ?? []) as $tile) {
-            $tiles[(string)$tile['key']] = $tile;
+            if ($tile['bookable'] ?? true) {
+                $tiles[(string)$tile['key']] = $tile;
+            }
         }
         return $tiles;
     }
